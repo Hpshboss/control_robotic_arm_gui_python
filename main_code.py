@@ -5,7 +5,7 @@
 # Created by: PyQt5 UI code generator 5.11.3
 #
 # WARNING! All changes made in this file will be lost!
-
+import serial
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_MainWindow(object):
