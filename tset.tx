@@ -1,0 +1,12 @@
+{
+    N0=100
+    $MAIN:
+        N0-=1
+        MA 10000
+        MA 0
+        DN
+        JZ N0,$STOP
+        JP $MAIN
+    $STOP
+        DN
+}
