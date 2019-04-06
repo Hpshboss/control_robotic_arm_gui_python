@@ -24,9 +24,13 @@ class Main(QMainWindow, GUI.Ui_MainWindow):
 
     def enter_pushbutton(self):
         print("Enter button")
+        text_buffer = self.textEdit.toPlainText()
+        text_buffer_list = text_buffer.splitlines()
+        print(text_buffer_list[-1])
         try:
             robotic_arm = serial.Serial("COM", 9600)
             robotic_arm.write(self.textEdit.toPlainText())
+            robotic_arm.read(50)
         except:
             print("failed enter")
 
