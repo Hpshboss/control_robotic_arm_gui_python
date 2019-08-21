@@ -27,15 +27,17 @@ class Main(QMainWindow, GUI.Ui_MainWindow):
         print("Enter button")
         text_buffer = self.textEdit.toPlainText()
         text_buffer_list = text_buffer.splitlines()
-        print(text_buffer_list[-1])
+        for index in text_buffer_list:
+            print(index)
         try:
-            robotic_arm = serial.Serial("COM8", 9600, xonxoff=True, timeout= 0.5)
-            robotic_arm.write(self.textEdit.toPlainText().encode() + os.linesep.encode())
-            print(robotic_arm.readline(50))
-            print(robotic_arm.readline(50))
-            print(robotic_arm.readline(50))
-            print(robotic_arm.readline(50))
-            print(robotic_arm.readline(50))
+            robotic_arm = serial.Serial("COM8", 9600, xonxoff=True, timeout=0.25)
+            for instruction in text_buffer_list:
+                robotic_arm.write(instruction.encode() + os.linesep.encode())
+                while True:
+                    message = robotic_arm.readline(50)
+                    print(message)
+                    if message.find("Sync done".encode()) != -1:
+                        break
         except:
             print("failed enter")
 
